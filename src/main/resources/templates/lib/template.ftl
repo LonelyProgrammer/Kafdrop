@@ -17,14 +17,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Kafdrop: ${title}</title>
+    <title>DPO KAFKA TOOL: ${title}</title>
     <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link type="text/css" rel="stylesheet" href="/css/font-awesome.min.css"/>
     <link type="text/css" rel="stylesheet" href="/css/global.css"/>
+    <link type="text/css" rel="stylesheet" href="/css/header.css" >
 
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/global.js"></script>
+     <script src="/js/dce.js"></script>
 
     <#nested>
 </head>

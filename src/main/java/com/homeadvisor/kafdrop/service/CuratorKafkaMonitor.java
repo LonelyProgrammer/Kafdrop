@@ -526,6 +526,10 @@ public class CuratorKafkaMonitor implements KafkaMonitor
    public List<ConsumerVO> getConsumers(final TopicVO topic)
    {
       validateInitialized();
+      List<ConsumerVO> consumerStream = getConsumerStream(topic)
+      .filter(consumer -> consumer.getTopic(topic.getName()) != null)
+      .collect(Collectors.toList());
+
       return getConsumerStream(topic)
          .filter(consumer -> consumer.getTopic(topic.getName()) != null)
          .collect(Collectors.toList());
@@ -544,6 +548,7 @@ public class CuratorKafkaMonitor implements KafkaMonitor
          .filter(Optional::isPresent)
          .map(Optional::get)
          .sorted(Comparator.comparing(ConsumerVO::getGroupId));
+
    }
 
    @Override
@@ -579,15 +584,18 @@ public class CuratorKafkaMonitor implements KafkaMonitor
 
       if (topic != null)
       {
+         // Check if the instances are active or not,if active assign stream data or else make stream as NULL.
          if (consumerTreeCache.getCurrentData(groupDirs.consumerGroupDir() + "/owners/" + topic.getName()) != null)
          {
             topicStream = Stream.of(topic.getName());
          }
          else
          {
-            topicStream = Stream.empty();
+            topicStream = Stream.of(topic.getName());
+            // topicStream = Stream.empty();
          }
       }
+      //---End of Change ----
       else
       {
          topicStream = Optional.ofNullable(

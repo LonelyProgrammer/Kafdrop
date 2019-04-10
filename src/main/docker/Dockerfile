@@ -1,5 +1,5 @@
 FROM java:8
-MAINTAINER homeadvisor
+MAINTAINER Saptarshi Bhattacharjee
 
 ADD kafdrop.sh /
 ADD kafdrop*tar.gz /
